@@ -76,6 +76,7 @@ export default {
       let tags = []
       if (this.routes) {
         routes.forEach(route => {
+<<<<<<< HEAD:src/layout/components/TagsView/index.vue
         if (route.meta && route.meta.affix) {
           const tagPath = path.resolve(basePath, route.path)
           tags.push({
@@ -92,6 +93,24 @@ export default {
           }
         }
       })
+=======
+          if (route.meta && route.meta.affix) {
+            const tagPath = path.resolve(basePath, route.path)
+            tags.push({
+              fullPath: tagPath,
+              path: tagPath,
+              name: route.name,
+              meta: { ...route.meta }
+            })
+          }
+          if (route.children) {
+            const tempTags = this.filterAffixTags(route.children, route.path)
+            if (tempTags.length >= 1) {
+              tags = [...tags, ...tempTags]
+            }
+          }
+        })
+>>>>>>> 3c419b42e7c38d98553b09ee77ffe9378bf93f6c:web-vue/src/layout/components/TagsView/index.vue
       }
       return tags
     },
