@@ -2,6 +2,7 @@ package com.manage.sys.service.impl;
 
 import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.manage.VO.Result;
 import com.manage.sys.entity.User;
 import com.manage.sys.mapper.UserMapper;
 import com.manage.sys.service.IUserService;
@@ -9,6 +10,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.util.HashMap;
 import java.util.List;
@@ -67,5 +70,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             return data;
         }
         return null;
+    }
+
+    @Override
+    public void logout(String token) {
+        redisTemplate.delete(token);
     }
 }

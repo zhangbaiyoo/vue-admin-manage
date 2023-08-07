@@ -42,4 +42,10 @@ public class UserController {
         if (data == null) return Result.Failed(20003, "登录失效，重新登录");
         return Result.success(data);
     }
+
+    @PostMapping("/logout")
+    public Result<?> logout(@RequestHeader("X-Token") String token){
+        userService.logout(token);
+        return Result.success();
+    }
 }
